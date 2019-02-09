@@ -1,5 +1,6 @@
-package chess;
+package chess.game;
 
+/** The chess board. */
 public class Board {
 
     private static final int DIMENSION = 8;
@@ -7,15 +8,17 @@ public class Board {
     private final Square[][] squares;
     private final Pieces pieces;
 
+    /** Creates a new Board instance. */
     public Board() {
         this.squares = new Square[DIMENSION][DIMENSION];
         this.pieces = new Pieces();
     }
 
+    /** Resets the current board. */
     public void reset() {
-        for (int i = 0; i < DIMENSION; i++) {
+        for (int i = 2; i <= 6; i++) {
             for (int j = 0; j < DIMENSION; j++) {
-                squares[i][j] = new Square(i, j);
+                squares[i][j].setCurrPiece(Piece.EMPTY);
             }
         }
 
@@ -56,6 +59,16 @@ public class Board {
         squares[8][5].setCurrPiece(pieces.getB2Knight());
         squares[8][6].setCurrPiece(pieces.getB2Bishop());
         squares[8][7].setCurrPiece(pieces.getB2Rook());
+    }
+
+    public boolean canMove(final Piece piece, final Coordinate coord) {
+        if (squares[coord.getColumn()][coord.getRow()].getCurrPiece() == Piece.EMPTY) {
+
+        } else if (true) {
+
+        }
+
+        return false;
     }
 
 }

@@ -1,7 +1,7 @@
-package chess;
+package chess.game;
 
-import chess.Piece.Color;
-import chess.Piece.Type;
+import chess.game.Piece.Color;
+import chess.game.Piece.Type;
 
 public class Pieces {
 
