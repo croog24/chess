@@ -1,5 +1,7 @@
 package chess.game;
 
+import chess.game.piece.Piece;
+
 /** The chess board. */
 public class Board {
 
@@ -61,6 +63,13 @@ public class Board {
         squares[8][7].setCurrPiece(pieces.getB2Rook());
     }
 
+    /**
+     * Determines whether or not the given piece can move to the given coordinate.
+     *
+     * @param piece the {@link} piece to move
+     * @param coord the {@link Coordinate} to move to
+     * @return {@code True} if it is a valid move
+     */
     public boolean canMove(final Piece piece, final Coordinate coord) {
         if (squares[coord.getColumn()][coord.getRow()].getCurrPiece() == Piece.EMPTY) {
 

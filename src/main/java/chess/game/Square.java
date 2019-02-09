@@ -1,5 +1,7 @@
 package chess.game;
 
+import chess.game.piece.Piece;
+
 public class Square {
 
     private final int row;

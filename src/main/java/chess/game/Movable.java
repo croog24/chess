@@ -1,12 +1,13 @@
 package chess.game;
 
+import java.util.List;
+
 public interface Movable {
 
     /**
-     * Moves this object to the given coordinate.
+     * Calculates all possible moves.
      *
-     * @param coord the {@link Coordinate} to move this piece to
-     * @return {@code True} if it the move is valid
+     * @return a {@code list} of possible {@link Coordinates} to move to
      */
-    boolean move(final Coordinate coord);
+    List<Coordinate> getMoves();
 }

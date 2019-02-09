@@ -1,8 +1,15 @@
 package chess.game;
 
-import chess.game.Piece.Color;
-import chess.game.Piece.Type;
+import chess.game.piece.Bishop;
+import chess.game.piece.King;
+import chess.game.piece.Knight;
+import chess.game.piece.Pawn;
+import chess.game.piece.Piece;
+import chess.game.piece.Piece.Color;
+import chess.game.piece.Queen;
+import chess.game.piece.Rook;
 
+/** A collection of {@link Piece}s. */
 public class Pieces {
 
     private final Piece w1Pawn;
@@ -40,39 +47,39 @@ public class Pieces {
     private final Piece bKing;
 
     public Pieces() {
-        w1Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w2Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w3Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w4Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w5Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w6Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w7Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w8Pawn = new Piece(Type.PAWN, Color.WHITE);
-        w1Knight = new Piece(Type.KNIGHT, Color.WHITE);
-        w2Knight = new Piece(Type.KNIGHT, Color.WHITE);
-        w1Bishop = new Piece(Type.BISHOP, Color.WHITE);
-        w2Bishop = new Piece(Type.BISHOP, Color.WHITE);
-        w1Rook = new Piece(Type.ROOK, Color.WHITE);
-        w2Rook = new Piece(Type.ROOK, Color.WHITE);
-        wQueen = new Piece(Type.QUEEN, Color.WHITE);
-        wKing = new Piece(Type.KING, Color.WHITE);
+        w1Pawn = new Pawn(Color.WHITE);
+        w2Pawn = new Pawn(Color.WHITE);
+        w3Pawn = new Pawn(Color.WHITE);
+        w4Pawn = new Pawn(Color.WHITE);
+        w5Pawn = new Pawn(Color.WHITE);
+        w6Pawn = new Pawn(Color.WHITE);
+        w7Pawn = new Pawn(Color.WHITE);
+        w8Pawn = new Pawn(Color.WHITE);
+        w1Knight = new Knight(Color.WHITE);
+        w2Knight = new Knight(Color.WHITE);
+        w1Bishop = new Bishop(Color.WHITE);
+        w2Bishop = new Bishop(Color.WHITE);
+        w1Rook = new Rook(Color.WHITE);
+        w2Rook = new Rook(Color.WHITE);
+        wQueen = new Queen(Color.WHITE);
+        wKing = new King(Color.WHITE);
 
-        b1Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b2Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b3Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b4Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b5Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b6Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b7Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b8Pawn = new Piece(Type.PAWN, Color.BLACK);
-        b1Knight = new Piece(Type.KNIGHT, Color.BLACK);
-        b2Knight = new Piece(Type.KNIGHT, Color.BLACK);
-        b1Bishop = new Piece(Type.BISHOP, Color.BLACK);
-        b2Bishop = new Piece(Type.BISHOP, Color.BLACK);
-        b1Rook = new Piece(Type.ROOK, Color.BLACK);
-        b2Rook = new Piece(Type.ROOK, Color.BLACK);
-        bQueen = new Piece(Type.QUEEN, Color.BLACK);
-        bKing = new Piece(Type.KING, Color.BLACK);
+        b1Pawn = new Pawn(Color.BLACK);
+        b2Pawn = new Pawn(Color.BLACK);
+        b3Pawn = new Pawn(Color.BLACK);
+        b4Pawn = new Pawn(Color.BLACK);
+        b5Pawn = new Pawn(Color.BLACK);
+        b6Pawn = new Pawn(Color.BLACK);
+        b7Pawn = new Pawn(Color.BLACK);
+        b8Pawn = new Pawn(Color.BLACK);
+        b1Knight = new Knight(Color.BLACK);
+        b2Knight = new Knight(Color.BLACK);
+        b1Bishop = new Bishop(Color.BLACK);
+        b2Bishop = new Bishop(Color.BLACK);
+        b1Rook = new Rook(Color.BLACK);
+        b2Rook = new Rook(Color.BLACK);
+        bQueen = new Queen(Color.BLACK);
+        bKing = new King(Color.BLACK);
     }
 
     public Piece getW1Pawn() {

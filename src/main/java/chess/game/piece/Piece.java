@@ -1,8 +1,9 @@
-package chess.game;
+package chess.game.piece;
 
 import java.util.Objects;
 
-public class Piece implements Movable {
+/** The main chess player objects. */
+public class Piece {
 
     /** The type of piece. */
     public static enum Type {
@@ -25,7 +26,7 @@ public class Piece implements Movable {
      * @param type the {@link Type}
      * @param color the {@link Color}
      */
-    public Piece(final Type type, final Color color) {
+    Piece(final Type type, final Color color) {
         this.type = Objects.requireNonNull(type);
         this.color = Objects.requireNonNull(color);
     }
@@ -48,12 +49,6 @@ public class Piece implements Movable {
      */
     public Color getColor() {
         return color;
-    }
-
-    @Override
-    public boolean move(final Coordinate coord) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     @Override
