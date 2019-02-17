@@ -1,13 +1,13 @@
 package chess.game;
 
-import java.util.List;
+import java.util.Set;
 
 public interface Movable {
 
     /**
-     * Calculates all possible moves.
+     * Calculates all possible moves, unvalidated.
      *
-     * @return a {@code list} of possible {@link Coordinates} to move to
+     * @return a {@code Set} of possible {@link Coordinates} to move to
      */
-    List<Coordinate> getMoves();
+    Set<Coordinate> getUnvalidatedMoves();
 }

@@ -1,7 +1,7 @@
 package chess.game.piece;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import chess.game.Coordinate;
 import chess.game.Movable;
@@ -23,16 +23,19 @@ public class Piece implements Movable {
 
     private final Type type;
     private final Color color;
+    protected Coordinate currPos;
 
     /**
      * Creates a new instance of a Piece.
      *
      * @param type the {@link Type}
      * @param color the {@link Color}
+     * @param initPos the initial {@link Coordinate}
      */
-    Piece(final Type type, final Color color) {
+    Piece(final Type type, final Color color, final Coordinate initPos) {
         this.type = Objects.requireNonNull(type);
         this.color = Objects.requireNonNull(color);
+        this.currPos = Objects.requireNonNull(initPos);
     }
 
     /** Used to create the {@link #EMPTY} piece. */
@@ -55,9 +58,17 @@ public class Piece implements Movable {
         return color;
     }
 
+    public void setCurrPos(final Coordinate pos) {
+        this.currPos = Objects.requireNonNull(pos);
+    }
+
+    public Coordinate getCurrPos() {
+        return currPos;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(color, type);
+        return Objects.hash(color, currPos, type);
     }
 
     @Override
@@ -72,17 +83,12 @@ public class Piece implements Movable {
             return false;
         }
         final Piece other = (Piece) obj;
-        return color == other.color && type == other.type;
+        return color == other.color && Objects.equals(currPos, other.currPos) && type == other.type;
     }
 
     @Override
-    public String toString() {
-        return "Piece [type=" + type + ", color=" + color + "]";
-    }
-
-    @Override
-    public List<Coordinate> getMoves() {
-        throw new UnsupportedOperationException();
+    public Set<Coordinate> getUnvalidatedMoves() {
+        throw new UnsupportedOperationException("Must implement getUnvalidatedMoves()");
     }
 
 }
