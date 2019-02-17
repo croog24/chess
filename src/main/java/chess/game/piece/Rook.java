@@ -1,7 +1,9 @@
 package chess.game.piece;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import chess.game.Board;
 import chess.game.Coordinate;
 import chess.game.Movable;
 
@@ -13,8 +15,16 @@ public class Rook extends Piece implements Movable {
 
     @Override
     public Set<Coordinate> getUnvalidatedMoves() {
-        // TODO Auto-generated method stub
-        return null;
+        final int currRow = currPos.getRow();
+        final int currCol = currPos.getColumn();
+
+        final Set<Coordinate> moves = new HashSet<>();
+        for (int i = 0; i < Board.DIMENSION; i++) {
+            moves.add(new Coordinate(i, currCol));
+            moves.add(new Coordinate(currRow, i));
+        }
+
+        return moves;
     }
 
 }
