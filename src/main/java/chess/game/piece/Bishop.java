@@ -13,7 +13,18 @@ public class Bishop extends Piece implements Movable {
 
     @Override
     public Set<Coordinate> getUnvalidatedMoves() {
-        // TODO Auto-generated method stub
+        return getUnvalidatedBishopMoves(currPos.getRow(), currPos.getColumn());
+    }
+
+    /**
+     * Gets all unvalidated moves of a Bishop piece for the given row and column.
+     *
+     * @param row the row of the bishop
+     * @param col the column of the bishop
+     * @return a {@code Set} of all possible moves
+     */
+    public static Set<Coordinate> getUnvalidatedBishopMoves(final int row, final int col) {
+
         return null;
     }
 

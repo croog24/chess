@@ -13,8 +13,9 @@ public class Queen extends Piece implements Movable {
 
     @Override
     public Set<Coordinate> getUnvalidatedMoves() {
-        // TODO Auto-generated method stub
-        return null;
+        final Set<Coordinate> moves = Rook.getUnvalidatedRookMoves(currPos.getRow(), currPos.getColumn());
+        moves.addAll(Bishop.getUnvalidatedBishopMoves(currPos.getRow(), currPos.getColumn()));
+        return moves;
     }
 
 }
