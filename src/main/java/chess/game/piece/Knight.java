@@ -18,19 +18,14 @@ public class Knight extends Piece implements Movable {
         final int currRow = currPos.getRow();
         final int currCol = currPos.getColumn();
 
-        final int rowRight = currRow + 2;
-        final int rowLeft = currRow - 2;
-        final int colUp = currCol + 2;
-        final int colDown = currCol - 2;
-
-        moves.add(new Coordinate(rowLeft, currCol - 1));
-        moves.add(new Coordinate(rowLeft, currCol + 1));
-        moves.add(new Coordinate(rowRight, currCol - 1));
-        moves.add(new Coordinate(rowRight, currCol + 1));
-        moves.add(new Coordinate(currRow + 1, colUp));
-        moves.add(new Coordinate(currRow - 1, colUp));
-        moves.add(new Coordinate(currRow + 1, colDown));
-        moves.add(new Coordinate(currRow - 1, colDown));
+        moves.add(new Coordinate(currRow - 2, currCol - 1));
+        moves.add(new Coordinate(currRow - 2, currCol + 1));
+        moves.add(new Coordinate(currRow + 2, currCol - 1));
+        moves.add(new Coordinate(currRow + 2, currCol + 1));
+        moves.add(new Coordinate(currRow + 1, currCol + 2));
+        moves.add(new Coordinate(currRow - 1, currCol + 2));
+        moves.add(new Coordinate(currRow + 1, currCol - 2));
+        moves.add(new Coordinate(currRow - 1, currCol - 2));
 
         return moves;
     }
