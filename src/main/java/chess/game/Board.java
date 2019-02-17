@@ -12,7 +12,7 @@ import chess.game.piece.Rook;
 /** The chess board. */
 public class Board {
 
-    private static final int DIMENSION = 8;
+    public static final int DIMENSION = 8;
 
     private final Square[][] squares;
 

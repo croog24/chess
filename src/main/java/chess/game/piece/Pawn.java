@@ -13,8 +13,15 @@ public class Pawn extends Piece implements Movable {
 
     @Override
     public Set<Coordinate> getUnvalidatedMoves() {
-        // TODO Auto-generated method stub
-        return null;
+
+        final int nextRow = currPos.getRow() + 1;
+        final int currCol = currPos.getColumn();
+
+        final Coordinate up = new Coordinate(nextRow, currCol);
+        final Coordinate upLeft = new Coordinate(nextRow, currCol - 1);
+        final Coordinate upRight = new Coordinate(nextRow, currCol + 1);
+        // TODO en passant
+        return Set.of(up, upLeft, upRight);
     }
 
 }
