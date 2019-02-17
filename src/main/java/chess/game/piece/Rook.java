@@ -15,7 +15,7 @@ public class Rook extends Piece implements Movable {
 
     @Override
     public Set<Coordinate> getUnvalidatedMoves() {
-        return (getUnvalidatedRookMoves(currPos.getRow(), currPos.getColumn()));
+        return getUnvalidatedRookMoves(currPos.getRow(), currPos.getColumn());
     }
 
     /**
