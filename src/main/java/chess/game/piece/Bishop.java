@@ -55,10 +55,4 @@ public class Bishop extends Piece implements Movable {
         return moves;
     }
 
-    public static void main(final String[] args) {
-        for (final Coordinate c : Bishop.getUnvalidatedBishopMoves(4, 2)) {
-            System.out.println(c);
-        }
-    }
-
 }
