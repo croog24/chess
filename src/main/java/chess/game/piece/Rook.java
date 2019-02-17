@@ -25,7 +25,7 @@ public class Rook extends Piece implements Movable {
      * @param col the column of the ROok
      * @return a {@code Set} of all possible moves
      */
-    public static Set<Coordinate> getUnvalidatedRookMoves(final int row, final int col) {
+    protected static Set<Coordinate> getUnvalidatedRookMoves(final int row, final int col) {
         final Set<Coordinate> moves = new HashSet<>();
         for (int i = 0; i < Board.DIMENSION; i++) {
             moves.add(new Coordinate(i, row));
