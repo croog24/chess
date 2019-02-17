@@ -1,5 +1,9 @@
 package chess.game;
 
+import static java.util.function.Predicate.not;
+
+import java.util.Set;
+
 import chess.game.piece.Bishop;
 import chess.game.piece.King;
 import chess.game.piece.Knight;
@@ -77,15 +81,23 @@ public class Board {
      * @return {@code True} if it is a valid move
      */
     public boolean canMove(final Piece piece, final Coordinate coord) {
-        if (piece.getUnvalidatedMoves().contains(coord)) {
-            if (!stateIsCheck(piece.getColor())) {
-                if (squares[coord.getColumn()][coord.getRow()].getCurrPiece() == Piece.EMPTY) {
+        final Set<Coordinate> validMoves = piece.getUnvalidatedMoves();
+        validMoves.removeIf(not(this::onBoard));
 
-                }
+        if (validMoves.contains(coord)) {
+            if (!stateIsCheck(piece.getColor())) {
+                return squares[coord.getColumn()][coord.getRow()].getCurrPiece().getColor() != piece.getColor();
             }
         }
 
         return false;
+    }
+
+    private boolean onBoard(final Coordinate coord) {
+        return coord.getColumn() >= 0
+            && coord.getRow() >= 0
+            && coord.getColumn() <= DIMENSION
+            && coord.getRow() <= DIMENSION;
     }
 
     private boolean stateIsCheck(final Color color) {

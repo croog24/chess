@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import chess.game.Board;
-import chess.game.BoundsCheck;
 import chess.game.Coordinate;
 import chess.game.Movable;
 
@@ -35,21 +34,10 @@ public class Bishop extends Piece implements Movable {
             final int colUp = col + i;
             final int colDown = col - i;
 
-            if (BoundsCheck.withinBoard(rowRight, colUp)) {
-                moves.add(new Coordinate(rowRight, colUp));
-            }
-
-            if (BoundsCheck.withinBoard(rowLeft, colUp)) {
-                moves.add(new Coordinate(rowLeft, colUp));
-            }
-
-            if (BoundsCheck.withinBoard(rowRight, colDown)) {
-                moves.add(new Coordinate(rowRight, colDown));
-            }
-
-            if (BoundsCheck.withinBoard(rowLeft, colDown)) {
-                moves.add(new Coordinate(rowLeft, colDown));
-            }
+            moves.add(new Coordinate(rowRight, colUp));
+            moves.add(new Coordinate(rowLeft, colUp));
+            moves.add(new Coordinate(rowRight, colDown));
+            moves.add(new Coordinate(rowLeft, colDown));
         }
 
         return moves;

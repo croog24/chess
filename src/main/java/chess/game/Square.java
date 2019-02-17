@@ -22,6 +22,9 @@ public class Square {
     }
 
     public Piece getCurrPiece() {
+        if (currPiece == null) {
+            return Piece.EMPTY;
+        }
         return currPiece;
     }
 
