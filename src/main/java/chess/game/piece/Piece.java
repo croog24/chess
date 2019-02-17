@@ -1,9 +1,13 @@
 package chess.game.piece;
 
+import java.util.List;
 import java.util.Objects;
 
+import chess.game.Coordinate;
+import chess.game.Movable;
+
 /** The main chess player objects. */
-public class Piece {
+public class Piece implements Movable {
 
     /** The type of piece. */
     public static enum Type {
@@ -74,6 +78,11 @@ public class Piece {
     @Override
     public String toString() {
         return "Piece [type=" + type + ", color=" + color + "]";
+    }
+
+    @Override
+    public List<Coordinate> getMoves() {
+        throw new UnsupportedOperationException();
     }
 
 }

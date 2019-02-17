@@ -1,6 +1,7 @@
 package chess.game;
 
 import chess.game.piece.Piece;
+import chess.game.piece.Piece.Color;
 
 /** The chess board. */
 public class Board {
@@ -71,12 +72,19 @@ public class Board {
      * @return {@code True} if it is a valid move
      */
     public boolean canMove(final Piece piece, final Coordinate coord) {
-        if (squares[coord.getColumn()][coord.getRow()].getCurrPiece() == Piece.EMPTY) {
+        if (piece.getMoves().contains(coord)) {
+            if (!stateIsCheck(piece.getColor())) {
+                if (squares[coord.getColumn()][coord.getRow()].getCurrPiece() == Piece.EMPTY) {
 
-        } else if (true) {
-
+                }
+            }
         }
 
+        return false;
+    }
+
+    private boolean stateIsCheck(final Color color) {
+        // TODO
         return false;
     }
 
