@@ -5,9 +5,8 @@ import java.util.Set;
 
 import chess.game.Board;
 import chess.game.Coordinate;
-import chess.game.Movable;
 
-public class Rook extends Piece implements Movable {
+public class Rook extends Piece {
 
     public Rook(final Color color, final int initRow, final int initCol) {
         super(Type.ROOK, color, new Coordinate(initRow, initCol));

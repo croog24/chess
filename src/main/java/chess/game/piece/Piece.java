@@ -4,10 +4,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import chess.game.Coordinate;
-import chess.game.Movable;
 
 /** The main chess player objects. */
-public class Piece implements Movable {
+public abstract class Piece {
 
     /** The type of piece. */
     public static enum Type {
@@ -18,8 +17,6 @@ public class Piece implements Movable {
     public static enum Color {
         WHITE, BLACK;
     }
-
-    public static Piece EMPTY = new Piece();
 
     private final Type type;
     private final Color color;
@@ -36,12 +33,6 @@ public class Piece implements Movable {
         this.type = Objects.requireNonNull(type);
         this.color = Objects.requireNonNull(color);
         this.currPos = Objects.requireNonNull(initPos);
-    }
-
-    /** Used to create the {@link #EMPTY} piece. */
-    private Piece() {
-        this.type = null;
-        this.color = null;
     }
 
     /**
@@ -86,9 +77,11 @@ public class Piece implements Movable {
         return color == other.color && Objects.equals(currPos, other.currPos) && type == other.type;
     }
 
-    @Override
-    public Set<Coordinate> getUnvalidatedMoves() {
-        throw new UnsupportedOperationException("Must implement getUnvalidatedMoves()");
-    }
+    /**
+     * Calculates all possible moves, unvalidated.
+     *
+     * @return a {@code Set} of possible {@link Coordinates} to move to
+     */
+    public abstract Set<Coordinate> getUnvalidatedMoves();
 
 }

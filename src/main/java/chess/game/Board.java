@@ -29,7 +29,7 @@ public class Board {
     public void reset() {
         for (int i = 2; i <= 6; i++) {
             for (int j = 0; j < DIMENSION; j++) {
-                squares[i][j].setCurrPiece(Piece.EMPTY);
+                squares[i][j].setCurrPiece(null);
             }
         }
 

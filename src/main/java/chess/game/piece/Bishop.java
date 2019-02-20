@@ -5,9 +5,8 @@ import java.util.Set;
 
 import chess.game.Board;
 import chess.game.Coordinate;
-import chess.game.Movable;
 
-public class Bishop extends Piece implements Movable {
+public class Bishop extends Piece{
 
     public Bishop(final Color color, final int initRow, final int initCol) {
         super(Type.BISHOP, color, new Coordinate(initRow, initCol));
