@@ -54,15 +54,14 @@ public class Board {
         squares[0][6].setCurrPiece(new Bishop(Color.WHITE, 0, 6));
         squares[0][7].setCurrPiece(new Rook(Color.WHITE, 0, 7));
 
-        squares[1][0].setCurrPiece(new Pawn(Color.BLACK, 7, 0));
-        squares[1][1].setCurrPiece(new Pawn(Color.BLACK, 7, 1));
-        squares[1][2].setCurrPiece(new Pawn(Color.BLACK, 7, 2));
-        squares[1][3].setCurrPiece(new Pawn(Color.BLACK, 7, 3));
-        squares[1][4].setCurrPiece(new Pawn(Color.BLACK, 7, 4));
-        squares[1][5].setCurrPiece(new Pawn(Color.BLACK, 7, 5));
-        squares[1][6].setCurrPiece(new Pawn(Color.BLACK, 7, 6));
-        squares[1][7].setCurrPiece(new Pawn(Color.BLACK, 7, 7));
-
+        squares[7][0].setCurrPiece(new Pawn(Color.BLACK, 7, 0));
+        squares[7][1].setCurrPiece(new Pawn(Color.BLACK, 7, 1));
+        squares[7][2].setCurrPiece(new Pawn(Color.BLACK, 7, 2));
+        squares[7][3].setCurrPiece(new Pawn(Color.BLACK, 7, 3));
+        squares[7][4].setCurrPiece(new Pawn(Color.BLACK, 7, 4));
+        squares[7][5].setCurrPiece(new Pawn(Color.BLACK, 7, 5));
+        squares[7][6].setCurrPiece(new Pawn(Color.BLACK, 7, 6));
+        squares[7][7].setCurrPiece(new Pawn(Color.BLACK, 7, 7));
         squares[8][0].setCurrPiece(new Rook(Color.BLACK, 8, 0));
         squares[8][1].setCurrPiece(new Knight(Color.BLACK, 8, 1));
         squares[8][2].setCurrPiece(new Bishop(Color.BLACK, 8, 2));
