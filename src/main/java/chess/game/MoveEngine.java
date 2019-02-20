@@ -1,5 +1,8 @@
 package chess.game;
 
+import static chess.game.Board.DIMENSION;
+import static chess.game.piece.Piece.Type.QUEEN;
+import static chess.game.piece.Piece.Type.ROOK;
 import static java.util.function.Predicate.not;
 
 import java.util.List;
@@ -57,12 +60,12 @@ public class MoveEngine {
     private boolean onBoard(final Coordinate coord) {
         return coord.getColumn() >= 0
                 && coord.getRow() >= 0
-                && coord.getColumn() <= Board.DIMENSION
-                && coord.getRow() <= Board.DIMENSION;
+                && coord.getColumn() <= DIMENSION
+                && coord.getRow() <= DIMENSION;
     }
 
     private boolean canMoveAcross(final Type type) {
-        return type == Type.QUEEN || type == Type.ROOK;
+        return type == QUEEN || type == ROOK;
     }
 
     private int getEndOfColumn(final Piece piece, final Direction direction) {
@@ -70,13 +73,13 @@ public class MoveEngine {
         final int row = piece.getCurrPos().getRow();
         switch (direction) {
             case UP:
-                for (int i = column + 1; i < Board.DIMENSION; i++) {
+                for (int i = column + 1; i < DIMENSION; i++) {
                     final Piece occupant = board.getPieceAt(new Coordinate(row, i));
                     if (occupant != null) {
                         return occupant.getColor() == piece.getColor() ? i : i + 1;
                     }
                 }
-                return Board.DIMENSION;
+                return DIMENSION;
             case DOWN:
                 for (int i = column - 1; i > -1; i--) {
                     final Piece occupant = board.getPieceAt(new Coordinate(row, i));
@@ -95,13 +98,13 @@ public class MoveEngine {
         final int row = piece.getCurrPos().getRow();
         switch (direction) {
             case RIGHT:
-                for (int i = row + 1; i < Board.DIMENSION; i++) {
+                for (int i = row + 1; i < DIMENSION; i++) {
                     final Piece occupant = board.getPieceAt(new Coordinate(i, column));
                     if (occupant != null) {
                         return occupant.getColor() == piece.getColor() ? i : i + 1;
                     }
                 }
-                return Board.DIMENSION;
+                return DIMENSION;
             case LEFT:
                 for (int i = row - 1; i > -1; i--) {
                     final Piece occupant = board.getPieceAt(new Coordinate(i, column));
