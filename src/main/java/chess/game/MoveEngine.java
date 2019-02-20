@@ -52,7 +52,7 @@ public class MoveEngine {
         }
 
         return moves
-                .parallelStream()
+                .stream()
                 .filter(move -> !isOccupiedBySameColor(move, piece.getColor()))
                 .collect(Collectors.toList());
     }
