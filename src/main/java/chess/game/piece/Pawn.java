@@ -1,5 +1,6 @@
 package chess.game.piece;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import chess.game.Coordinate;
@@ -12,15 +13,15 @@ public class Pawn extends Piece {
 
     @Override
     public Set<Coordinate> getUnvalidatedMoves() {
-
+        final Set<Coordinate> set = new HashSet<>();
         final int nextRow = currPos.getRow() + 1;
         final int currCol = currPos.getColumn();
 
-        final Coordinate up = new Coordinate(nextRow, currCol);
-        final Coordinate upLeft = new Coordinate(nextRow, currCol - 1);
-        final Coordinate upRight = new Coordinate(nextRow, currCol + 1);
+        set.add(new Coordinate(nextRow, currCol));
+        set.add(new Coordinate(nextRow, currCol - 1));
+        set.add(new Coordinate(nextRow, currCol + 1));
         // TODO en passant
-        return Set.of(up, upLeft, upRight);
+        return set;
     }
 
 }
