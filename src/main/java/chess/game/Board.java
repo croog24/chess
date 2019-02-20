@@ -1,9 +1,5 @@
 package chess.game;
 
-import static java.util.function.Predicate.not;
-
-import java.util.Set;
-
 import chess.game.piece.Bishop;
 import chess.game.piece.King;
 import chess.game.piece.Knight;
@@ -19,10 +15,12 @@ public class Board {
     public static final int DIMENSION = 8;
 
     private final Square[][] squares;
+    private State state;
 
     /** Creates a new Board instance. */
     public Board() {
         this.squares = new Square[DIMENSION][DIMENSION];
+        this.state = State.NEUTRAL;
     }
 
     /** Resets the current board. */
@@ -32,6 +30,8 @@ public class Board {
                 squares[i][j].setCurrPiece(null);
             }
         }
+
+        state = State.NEUTRAL;
 
         initPieces();
     }
@@ -73,35 +73,22 @@ public class Board {
     }
 
     /**
-     * Determines whether or not the given piece can move to the given coordinate.
+     * Get the existing {@link Piece} at the given {@link Coordinate}.
      *
-     * @param piece the {@link} piece to move
-     * @param coord the {@link Coordinate} to move to
-     * @return {@code True} if it is a valid move
+     * @param coord the {@link Coordinate} to check
+     * @return the occupying {@link Piece} of {@code null} if empty
      */
-    public boolean canMove(final Piece piece, final Coordinate coord) {
-        final Set<Coordinate> validMoves = piece.getUnvalidatedMoves();
-        validMoves.removeIf(not(this::onBoard));
-
-        if (validMoves.contains(coord)) {
-            if (!stateIsCheck(piece.getColor())) {
-                return squares[coord.getColumn()][coord.getRow()].getCurrPiece().getColor() != piece.getColor();
-            }
-        }
-
-        return false;
+    public Piece getPieceAt(final Coordinate coord) {
+        return squares[coord.getRow()][coord.getColumn()].getCurrPiece();
     }
 
-    private boolean onBoard(final Coordinate coord) {
-        return coord.getColumn() >= 0
-            && coord.getRow() >= 0
-            && coord.getColumn() <= DIMENSION
-            && coord.getRow() <= DIMENSION;
-    }
-
-    private boolean stateIsCheck(final Color color) {
-        // TODO
-        return false;
+    /**
+     * Get the current game {@link State}.
+     *
+     * @return the current state
+     */
+    public State getState() {
+        return state;
     }
 
 }
