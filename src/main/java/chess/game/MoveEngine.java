@@ -91,7 +91,7 @@ public class MoveEngine {
     }
 
     /**
-     * Find the farthest colunm a piece can move in the given direction before being blocked by another piece.
+     * Find the farthest column a piece can move in the given direction before being blocked by another piece.
      *
      * @param piece the {@link Piece} in it's current position
      * @param direction the {@link Direction} to check
