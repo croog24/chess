@@ -1,6 +1,7 @@
 package chess.game;
 
 import static chess.game.Board.DIMENSION;
+import static chess.game.piece.Piece.Type.BISHOP;
 import static chess.game.piece.Piece.Type.QUEEN;
 import static chess.game.piece.Piece.Type.ROOK;
 import static java.util.function.Predicate.not;
@@ -17,7 +18,7 @@ import chess.game.piece.Piece.Type;
 public class MoveEngine {
 
     private static enum Direction {
-        UP, DOWN, LEFT, RIGHT
+        UP, DOWN, LEFT, RIGHT, DIAG_UP_LEFT, DIAG_UP_RIGHT, DIAG_DOWN_LEFT, DIAG_DOWN_RIGHT
     }
 
     private final Board board;
@@ -49,6 +50,23 @@ public class MoveEngine {
             final int lastRightRow = getEndOfRow(piece, Direction.RIGHT);
             final int lastLeftRow = getEndOfRow(piece, Direction.LEFT);
             moves.removeIf(move -> move.getRow() < lastLeftRow || move.getRow() > lastRightRow);
+        } else if (canMoveDiagonal(piece.getType())) {
+            final Coordinate lastUpLeft = getEndOfDiag(piece, Direction.DIAG_UP_LEFT);
+            final Coordinate lastUpRight = getEndOfDiag(piece, Direction.DIAG_UP_RIGHT);
+            final Coordinate lastDownLeft = getEndOfDiag(piece, Direction.DIAG_DOWN_LEFT);
+            final Coordinate lastDownRight = getEndOfDiag(piece, Direction.DIAG_DOWN_RIGHT);
+
+            moves.removeIf(move -> move.getRow() > lastUpLeft.getRow()
+                                && move.getColumn() < lastUpLeft.getColumn());
+
+            moves.removeIf(move -> move.getRow() > lastUpRight.getRow()
+                                && move.getColumn() > lastUpRight.getColumn());
+
+            moves.removeIf(move -> move.getRow() < lastDownLeft.getRow()
+                                && move.getColumn() < lastDownLeft.getColumn());
+
+            moves.removeIf(move -> move.getRow() < lastDownRight.getRow()
+                                && move.getColumn() > lastDownRight.getColumn());
         }
 
         return moves
@@ -59,15 +77,26 @@ public class MoveEngine {
 
     private boolean onBoard(final Coordinate coord) {
         return coord.getColumn() >= 0
-                && coord.getRow() >= 0
-                && coord.getColumn() <= DIMENSION
-                && coord.getRow() <= DIMENSION;
+            && coord.getRow() >= 0
+            && coord.getColumn() <= DIMENSION
+            && coord.getRow() <= DIMENSION;
     }
 
     private boolean canMoveAcross(final Type type) {
         return type == QUEEN || type == ROOK;
     }
 
+    private boolean canMoveDiagonal(final Type type) {
+        return type == QUEEN || type == BISHOP;
+    }
+
+    /**
+     * Find the farthest colunm a piece can move in the given direction before being blocked by another piece.
+     *
+     * @param piece the {@link Piece} in it's current position
+     * @param direction the {@link Direction} to check
+     * @return the last column that can be moved to
+     */
     private int getEndOfColumn(final Piece piece, final Direction direction) {
         final int column = piece.getCurrPos().getColumn();
         final int row = piece.getCurrPos().getRow();
@@ -93,6 +122,13 @@ public class MoveEngine {
         }
     }
 
+    /**
+     * Find the farthest row a piece can move in the given direction before being blocked by another piece.
+     *
+     * @param piece the {@link Piece} in it's current position
+     * @param direction the {@link Direction} to check
+     * @return the last row that can be moved to
+     */
     private int getEndOfRow(final Piece piece, final Direction direction) {
         final int column = piece.getCurrPos().getColumn();
         final int row = piece.getCurrPos().getRow();
@@ -116,6 +152,64 @@ public class MoveEngine {
             default:
                 throw new IllegalArgumentException("Can only find end of column from LEFT or RIGHT");
         }
+    }
+
+    /**
+     * Find the farthest diagonal square a piece can move in the given direction before being blocked by another piece.
+     *
+     * @param piece the {@link Piece} in it's current position
+     * @param direction the {@link Direction} to check
+     * @return the last coordinate that can be moved to
+     */
+    private Coordinate getEndOfDiag(final Piece piece, final Direction direction) {
+        final int column = piece.getCurrPos().getColumn();
+        final int row = piece.getCurrPos().getRow();
+        switch (direction) {
+            case DIAG_DOWN_LEFT:
+                for (int i = row - 1, j = column - 1; i < DIMENSION && j < DIMENSION; i--, j--) {
+                    final Piece occupant = board.getPieceAt(new Coordinate(i, j));
+                    if (occupant != null) {
+                        return occupant.getColor() == piece.getColor()
+                                ? new Coordinate(i + 1, j + 1)
+                                : occupant.getCurrPos();
+                    }
+                }
+                break;
+            case DIAG_DOWN_RIGHT:
+                for (int i = row - 1, j = column + 1; i < DIMENSION && j < DIMENSION; i--, j++) {
+                    final Piece occupant = board.getPieceAt(new Coordinate(i, j));
+                    if (occupant != null) {
+                        return occupant.getColor() == piece.getColor()
+                                ? new Coordinate(i + 1, j - 1)
+                                : occupant.getCurrPos();
+                    }
+                }
+                break;
+            case DIAG_UP_LEFT:
+                for (int i = row + 1, j = column - 1; i < DIMENSION && j < DIMENSION; i++, j--) {
+                    final Piece occupant = board.getPieceAt(new Coordinate(i, j));
+                    if (occupant != null) {
+                        return occupant.getColor() == piece.getColor()
+                                ? new Coordinate(i + 1, j - 1)
+                                : occupant.getCurrPos();
+                    }
+                }
+                break;
+            case DIAG_UP_RIGHT:
+                for (int i = row + 1, j = column + 1; i < DIMENSION && j < DIMENSION; i++, j++) {
+                    final Piece occupant = board.getPieceAt(new Coordinate(i, j));
+                    if (occupant != null) {
+                        return occupant.getColor() == piece.getColor()
+                                ? new Coordinate(i + 1, j + 1)
+                                : occupant.getCurrPos();
+                    }
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Can only find end of diag from DIAG based direction");
+        }
+
+        return piece.getCurrPos();
     }
 
     private boolean isOccupiedBySameColor(final Coordinate coord, final Color color) {
