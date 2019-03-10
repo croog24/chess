@@ -10,7 +10,17 @@ public abstract class Piece {
 
     /** The type of piece. */
     public static enum Type {
-        PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING
+        PAWN("P"), KNIGHT("k"), BISHOP("B"), ROOK("R"), QUEEN("Q"), KING("K");
+
+        private final String abbreviation;
+
+        private Type(final String abbreviation) {
+            this.abbreviation = abbreviation;
+        }
+
+        public String getAbbreviation() {
+            return abbreviation;
+        }
     }
 
     /** White or Black. */

@@ -22,17 +22,21 @@ public class Board {
     /** Creates a new Board instance. */
     public Board() {
         this.squares = new Square[DIMENSION][DIMENSION];
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                squares[i][j] = new Square(i, j);
+            }
+        }
         this.state = State.NEUTRAL;
     }
 
     /** Resets the current board. */
     public void reset() {
-        for (int i = 2; i <= 6; i++) {
+        for (int i = 2; i < 7; i++) {
             for (int j = 0; j < DIMENSION; j++) {
                 squares[i][j].setCurrPiece(null);
             }
         }
-
         state = State.NEUTRAL;
 
         initPieces();
@@ -56,22 +60,22 @@ public class Board {
         squares[0][6].setCurrPiece(new Bishop(WHITE, 0, 6));
         squares[0][7].setCurrPiece(new Rook(WHITE, 0, 7));
 
-        squares[7][0].setCurrPiece(new Pawn(BLACK, 7, 0));
-        squares[7][1].setCurrPiece(new Pawn(BLACK, 7, 1));
-        squares[7][2].setCurrPiece(new Pawn(BLACK, 7, 2));
-        squares[7][3].setCurrPiece(new Pawn(BLACK, 7, 3));
-        squares[7][4].setCurrPiece(new Pawn(BLACK, 7, 4));
-        squares[7][5].setCurrPiece(new Pawn(BLACK, 7, 5));
-        squares[7][6].setCurrPiece(new Pawn(BLACK, 7, 6));
-        squares[7][7].setCurrPiece(new Pawn(BLACK, 7, 7));
-        squares[8][0].setCurrPiece(new Rook(BLACK, 8, 0));
-        squares[8][1].setCurrPiece(new Knight(BLACK, 8, 1));
-        squares[8][2].setCurrPiece(new Bishop(BLACK, 8, 2));
-        squares[8][3].setCurrPiece(new Queen(BLACK, 8, 3));
-        squares[8][4].setCurrPiece(new King(BLACK, 8, 4));
-        squares[8][5].setCurrPiece(new Knight(BLACK, 8, 5));
-        squares[8][6].setCurrPiece(new Bishop(BLACK, 8, 6));
-        squares[8][7].setCurrPiece(new Rook(BLACK, 8, 7));
+        squares[6][0].setCurrPiece(new Pawn(BLACK, 6, 0));
+        squares[6][1].setCurrPiece(new Pawn(BLACK, 6, 1));
+        squares[6][2].setCurrPiece(new Pawn(BLACK, 6, 2));
+        squares[6][3].setCurrPiece(new Pawn(BLACK, 6, 3));
+        squares[6][4].setCurrPiece(new Pawn(BLACK, 6, 4));
+        squares[6][5].setCurrPiece(new Pawn(BLACK, 6, 5));
+        squares[6][6].setCurrPiece(new Pawn(BLACK, 6, 6));
+        squares[6][7].setCurrPiece(new Pawn(BLACK, 6, 7));
+        squares[7][0].setCurrPiece(new Rook(BLACK, 7, 0));
+        squares[7][1].setCurrPiece(new Knight(BLACK, 7, 1));
+        squares[7][2].setCurrPiece(new Bishop(BLACK, 7, 2));
+        squares[7][3].setCurrPiece(new Queen(BLACK, 7, 3));
+        squares[7][4].setCurrPiece(new King(BLACK, 7, 4));
+        squares[7][5].setCurrPiece(new Knight(BLACK, 7, 5));
+        squares[7][6].setCurrPiece(new Bishop(BLACK, 7, 6));
+        squares[7][7].setCurrPiece(new Rook(BLACK, 7, 7));
     }
 
     /**
@@ -91,6 +95,26 @@ public class Board {
      */
     public State getState() {
         return state;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(state);
+        // Each square is 5x3 dashes large
+        final String line = "\n---------------------------------\n";
+        sb.append(line);
+        for (int i = DIMENSION - 1; i >= 0; i--) {
+            for (int j = 0; j < DIMENSION; j++) {
+                final Piece p = squares[i][j].getCurrPiece();
+                final String value = p == null ? "   " : " " + p.getType().getAbbreviation() + " ";
+                sb.append("|" + value);
+            }
+            sb.append("|");
+            sb.append(line);
+        }
+
+        return sb.toString();
     }
 
 }
