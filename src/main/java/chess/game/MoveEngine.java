@@ -4,7 +4,6 @@ import static chess.game.Board.DIMENSION;
 import static chess.game.piece.Piece.Type.BISHOP;
 import static chess.game.piece.Piece.Type.QUEEN;
 import static chess.game.piece.Piece.Type.ROOK;
-import static java.util.function.Predicate.not;
 
 import java.util.List;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class MoveEngine {
      */
     public List<Coordinate> calculateValidMoves(final Piece piece) {
         final Set<Coordinate> moves = piece.getUnvalidatedMoves();
-        moves.removeIf(not(this::onBoard));
+        moves.removeIf(c -> this.onBoard(c));
 
         // Optimize by limiting to nearest unblocked row/col
         if (canMoveAcross(piece.getType())) {

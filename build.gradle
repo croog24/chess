@@ -1,3 +1,12 @@
+plugins {
+    id 'application'
+}
 repositories {
     mavenCentral()
 }
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+println "Current Java version is: ${JavaVersion.current()}"
+
+mainClassName = 'chess.game.Game'
