@@ -5,9 +5,7 @@ import static chess.game.piece.Piece.Type.BISHOP;
 import static chess.game.piece.Piece.Type.QUEEN;
 import static chess.game.piece.Piece.Type.ROOK;
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import chess.game.piece.Piece;
 import chess.game.piece.Piece.Color;
@@ -35,9 +33,9 @@ public class MoveEngine {
      * Calculates the given {@link Piece}'s valid moves.
      *
      * @param piece the {@link Piece} to calculate from
-     * @return a {@code List} of valid moves
+     * @return a {@code Set} of valid moves
      */
-    public List<Coordinate> calculateValidMoves(final Piece piece) {
+    public Set<Coordinate> calculateValidMoves(final Piece piece) {
         final Set<Coordinate> moves = piece.getUnvalidatedMoves();
         moves.removeIf(c -> this.onBoard(c));
 
@@ -68,10 +66,8 @@ public class MoveEngine {
                                 && move.getColumn() > lastDownRight.getColumn());
         }
 
-        return moves
-                .stream()
-                .filter(move -> !isOccupiedBySameColor(move, piece.getColor()))
-                .collect(Collectors.toList());
+        moves.removeIf(m -> !isOccupiedBySameColor(m, piece.getColor()));
+        return moves;
     }
 
     private boolean onBoard(final Coordinate coord) {
