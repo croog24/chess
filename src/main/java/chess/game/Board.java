@@ -108,7 +108,7 @@ public class Board {
             for (int j = 0; j < DIMENSION; j++) {
                 final Piece p = squares[i][j].getCurrPiece();
                 final String value = p == null ? "   " : " " + p.getType().getAbbreviation() + " ";
-                sb.append("|" + value);
+                sb.append("|").append(value);
             }
             sb.append("|");
             sb.append(line);

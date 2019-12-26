@@ -14,7 +14,7 @@ import chess.game.piece.Piece.Type;
 /** The primary implementation for determining valid moves and mates. */
 public class MoveEngine {
 
-    private static enum Direction {
+    private enum Direction {
         UP, DOWN, LEFT, RIGHT, DIAG_UP_LEFT, DIAG_UP_RIGHT, DIAG_DOWN_LEFT, DIAG_DOWN_RIGHT
     }
 
@@ -37,7 +37,7 @@ public class MoveEngine {
      */
     public Set<Coordinate> calculateValidMoves(final Piece piece) {
         final Set<Coordinate> moves = piece.getUnvalidatedMoves();
-        moves.removeIf(c -> this.onBoard(c));
+        moves.removeIf(this::onBoard);
 
         // Optimize by limiting to nearest unblocked row/col
         if (canMoveAcross(piece.getType())) {

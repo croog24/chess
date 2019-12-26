@@ -9,12 +9,12 @@ import chess.game.Coordinate;
 public abstract class Piece {
 
     /** The type of piece. */
-    public static enum Type {
+    public enum Type {
         PAWN("P"), KNIGHT("k"), BISHOP("B"), ROOK("R"), QUEEN("Q"), KING("K");
 
         private final String abbreviation;
 
-        private Type(final String abbreviation) {
+        Type(final String abbreviation) {
             this.abbreviation = abbreviation;
         }
 
@@ -24,8 +24,8 @@ public abstract class Piece {
     }
 
     /** White or Black. */
-    public static enum Color {
-        WHITE, BLACK;
+    public enum Color {
+        WHITE, BLACK
     }
 
     private final Type type;
@@ -90,7 +90,7 @@ public abstract class Piece {
     /**
      * Calculates all possible moves, unvalidated.
      *
-     * @return a {@code Set} of possible {@link Coordinates} to move to
+     * @return a {@code Set} of possible {@link Coordinate} to move to
      */
     public abstract Set<Coordinate> getUnvalidatedMoves();
 
